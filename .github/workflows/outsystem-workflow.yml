@@ -1,0 +1,17 @@
+name: Testim E2E
+on:
+  workflow_dispatch:
+
+jobs:
+  run-testimio-cli:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "18.17.0"
+      - run: npm install -g @testim/testim-cli
+
+      - name: Run Testim Tests
+        run: |
+          testim -c "config/partnershub-bo-config.js"  --token ${{ secrets.TESTIM_TOKEN }} --project ${{ secrets.TESTIM_PROJECT }} --grid "Testim-Grid" --branch "Jia/test-webhook" --test-plan "Test - Webhook"
