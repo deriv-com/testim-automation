@@ -14,4 +14,4 @@ jobs:
 
       - name: Run Testim Tests
         run: |
-          testim -c "config/partnershub-bo-config.js"  --token ${{ secrets.TESTIM_TOKEN }} --project ${{ secrets.TESTIM_PROJECT }} --grid "Testim-Grid" --branch "Jia/test-webhook" --test-plan "Test - Webhook"
+          testim -c "config/partnershub-bo-config.js"  --token ${{ secrets.TESTIM_TOKEN }} --project ${{ secrets.TESTIM_PROJECT }} --grid "Testim-Grid" --branch "Jia/test-webhook" --test-plan "Regression - Partners Hub - Desktop"
