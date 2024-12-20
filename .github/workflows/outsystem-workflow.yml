@@ -6,7 +6,7 @@ on:
         description: "Testim Branch"
         required: true
         default: "Jia/test-webhook"
-      testname:
+      testplan:
         description: "Testim Test Name"
         required: true
         default: "Regression - Partners Hub - Desktop"
@@ -32,7 +32,7 @@ jobs:
       G_LOGIN_NON_PARTNER: ${{ secrets.G_LOGIN_NON_PARTNER }}
       G_PASSWORD_NON_PARTNER: ${{ secrets.G_PASSWORD_NON_PARTNER }}
       APP_NAME: ${{ github.event.inputs.app_name }},
-      SUITE_NAME: ${{ github.event.inputs.testname }},
+      SUITE_NAME: ${{ github.event.inputs.testplan }},
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
       - uses: actions/checkout@v2
@@ -49,4 +49,4 @@ jobs:
             --project "${{ env.TESTIM_PROJECT }}" \
             --grid "Testim-Grid" \
             --branch "${{ github.event.inputs.branch }}" \
-            --test-plan "${{ github.event.inputs.testname }}"
+            --test-plan "${{ github.event.inputs.testplan }}"
