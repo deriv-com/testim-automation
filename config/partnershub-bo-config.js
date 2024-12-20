@@ -9,9 +9,6 @@ exports.config = {
 
     const testim_link = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${name}`;
 
-    console.log("testim_link", testim_link);
-    console.log("slackApiUrl", slackApiUrl);
-
     axios
       .post(process.env.SLACK_WEBHOOK_URL, {
         app_name: process.env.APP_NAME,
