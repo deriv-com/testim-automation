@@ -6,9 +6,7 @@ exports.config = {
     const project = encodeURIComponent(process.env.TESTIM_PROJECT);
     const branch = encodeURIComponent(process.env.BRANCH);
     const name = encodeURIComponent(process.env.SUITE_NAME);
-    const slack = process.env.SLACK_WEBHOOK_URL;
-
-    console.log(slack);
+    const slack = process.env.SLACK_WEBHOOK_URL.slice(0, -1);
 
     const testim_link = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${name}`;
 
