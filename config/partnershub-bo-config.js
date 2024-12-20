@@ -6,11 +6,12 @@ exports.config = {
     const project = encodeURIComponent(process.env.TESTIM_PROJECT);
     const branch = encodeURIComponent(process.env.BRANCH);
     const name = encodeURIComponent(process.env.SUITE_NAME);
+    const slack = encodeURIComponent(process.env.SLACK_WEBHOOK_URL);
 
     const testim_link = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${name}`;
 
     axios
-      .post(process.env.SLACK_WEBHOOK_URL, {
+      .post(slack, {
         app_name: process.env.APP_NAME,
         suite: process.env.SUITE_NAME,
         environment: process.env.ENVIRONMENT,
