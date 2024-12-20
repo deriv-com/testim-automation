@@ -14,6 +14,7 @@ exports.config = {
     )}/runs/suites/${encodeURIComponent(suite.executionId)}`;
 
     console.log("testim_link", testim_link);
+    console.log("slackApiUrl", slackApiUrl);
 
     axios
       .post(slackApiUrl, {
