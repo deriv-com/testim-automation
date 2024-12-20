@@ -3,15 +3,15 @@ require("dotenv").config();
 
 exports.config = {
   beforeSuite: function (suite) {
+    const id = suite.executionId;
     const project = encodeURIComponent(process.env.TESTIM_PROJECT);
     const branch = encodeURIComponent(process.env.BRANCH);
-    const name = encodeURIComponent(process.env.SUITE_NAME);
-    const slack = process.env.SLACK_WEBHOOK_URL.slice(0, -1);
+    const slack = process.env.SLACK_WEBHOOK_URL;
 
-    const testim_link = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${name}`;
+    const testim_link = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${id}`;
 
     axios
-      .post(`${slack}`, {
+      .post(slack, {
         app_name: process.env.APP_NAME,
         suite: process.env.SUITE_NAME,
         environment: process.env.ENVIRONMENT,

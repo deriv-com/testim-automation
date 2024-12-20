@@ -34,9 +34,9 @@ jobs:
       G_PASSWORD_BO: ${{ secrets.G_PASSWORD_BO }}
       G_LOGIN_NON_PARTNER: ${{ secrets.G_LOGIN_NON_PARTNER }}
       G_PASSWORD_NON_PARTNER: ${{ secrets.G_PASSWORD_NON_PARTNER }}
-      APP_NAME: ${{ github.event.inputs.app_name }},
-      SUITE_NAME: ${{ github.event.inputs.testplan }},
-      SLACK_WEBHOOK_URL: ${{ github.event.inputs.slack_url }},
+      APP_NAME: ${{ github.event.inputs.app_name }}
+      SUITE_NAME: ${{ github.event.inputs.testplan }}
+      SLACK_WEBHOOK_URL: ${{ github.event.inputs.slack_url }}
       BRANCH: ${{ github.event.inputs.branch }}
     steps:
       - uses: actions/checkout@v2
