@@ -1,6 +1,19 @@
 name: Testim E2E
 on:
   workflow_dispatch:
+    inputs:
+      branch:
+        description: "Testim Branch"
+        required: true
+        default: "Jia/test-webhook"
+      testname:
+        description: "Testim Test Name"
+        required: true
+        default: "Regression - Partners Hub - Desktop"
+      environment:
+        description: "Outsystems publish environment"
+        required: true
+        default: "staging"
 
 jobs:
   run-testimio-cli:
@@ -11,7 +24,8 @@ jobs:
         with:
           node-version: "18.17.0"
       - run: npm install -g @testim/testim-cli
+      - run: npm i
 
       - name: Run Testim Tests
         run: |
-          testim -c "config/partnershub-bo-config.js"  --token ${{ secrets.TESTIM_TOKEN }} --project ${{ secrets.TESTIM_PROJECT }} --grid "Testim-Grid" --branch "Jia/test-webhook" --test-plan "Regression - Partners Hub - Desktop"
+          testim -c "config/partnershub-bo-config.js"  --token ${{ secrets.TESTIM_TOKEN }} --project ${{ secrets.TESTIM_PROJECT }} --grid "Testim-Grid" --branch ${{ github.event.inputs.branch }} --test-plan ${{ github.event.inputs.testname }}
