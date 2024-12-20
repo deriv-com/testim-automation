@@ -5,9 +5,9 @@ exports.config = {
   beforeSuite: function (suite) {
     const project = encodeURIComponent(process.env.TESTIM_PROJECT);
     const branch = encodeURIComponent(process.env.BRANCH);
-    const suite = encodeURIComponent(process.env.SUITE_NAME);
+    const name = encodeURIComponent(process.env.SUITE_NAME);
 
-    const testim_link = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${suite}`;
+    const testim_link = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${name}`;
 
     console.log("testim_link", testim_link);
     console.log("slackApiUrl", slackApiUrl);
