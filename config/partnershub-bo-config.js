@@ -8,6 +8,8 @@ exports.config = {
     const name = encodeURIComponent(process.env.SUITE_NAME);
     const slack = process.env.SLACK_WEBHOOK_URL;
 
+    console.log(slack);
+
     const testim_link = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${name}`;
 
     axios
