@@ -9,9 +9,9 @@ exports.config = {
 
     const testim_link = `https://app.testim.io/#/project/${encodeURIComponent(
       process.env.TESTIM_PROJECT
-    )}/branch/Jia%2Ftest-webhook/runs/suites/${encodeURIComponent(
-      suite.executionId
-    )}`;
+    )}/branch/${encodeURIComponent(
+      process.env.BRANCH
+    )}/runs/suites/${encodeURIComponent(suite.executionId)}`;
 
     axios
       .post(slackApiUrl, {
