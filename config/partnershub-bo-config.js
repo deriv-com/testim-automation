@@ -13,6 +13,8 @@ exports.config = {
       process.env.BRANCH
     )}/runs/suites/${encodeURIComponent(suite.executionId)}`;
 
+    console.log("testim_link", testim_link);
+
     axios
       .post(slackApiUrl, {
         app_name: process.env.APP_NAME,
