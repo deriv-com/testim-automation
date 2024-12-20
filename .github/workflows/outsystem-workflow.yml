@@ -28,9 +28,9 @@ jobs:
 
       - name: Run Testim Tests
         run: |
-          testim -c "config/partnershub-bo-config.js" 
-          --token ${{ secrets.TESTIM_TOKEN }} 
-          --project ${{ secrets.TESTIM_PROJECT }} 
-          --grid "Testim-Grid" 
-          --branch "${{ github.event.inputs.branch }}" 
-          --test-plan "${{ github.event.inputs.testname }}"
+          testim -c "config/partnershub-bo-config.js" \
+            --token "${{ secrets.TESTIM_TOKEN }}" \
+            --project "${{ secrets.TESTIM_PROJECT }}" \
+            --grid "Testim-Grid" \
+            --branch "${{ github.event.inputs.branch }}" \
+            --test-plan "${{ github.event.inputs.testname }}"
