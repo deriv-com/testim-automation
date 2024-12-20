@@ -17,8 +17,8 @@ exports.config = {
       .post(slackApiUrl, {
         app_name: process.env.APP_NAME,
         suite: process.env.SUITE_NAME,
-        testim_link: testim_link,
         environment: process.env.ENVIRONMENT,
+        testim_link: testim_link,
       })
       .then((response) => {
         console.log(`Slack API posted successfully: ${response.status}`);
