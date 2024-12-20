@@ -13,7 +13,7 @@ exports.config = {
     const testim_link = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${name}`;
 
     axios
-      .post(slack, {
+      .post(`${slack}`, {
         app_name: process.env.APP_NAME,
         suite: process.env.SUITE_NAME,
         environment: process.env.ENVIRONMENT,
