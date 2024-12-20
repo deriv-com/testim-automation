@@ -21,6 +21,12 @@ jobs:
     env:
       TESTIM_PROJECT: ${{ secrets.TESTIM_PROJECT }}
       ENVIRONMENT: ${{ github.event.inputs.environment }}
+      G_LOGIN: ${{ secrets.G_LOGIN }}
+      G_PASSWORD: ${{ secrets.G_PASSWORD }}
+      G_LOGIN_BO: ${{ secrets.G_LOGIN_BO }}
+      G_PASSWORD_BO: ${{ secrets.G_PASSWORD_BO }}
+      G_LOGIN_NON_PARTNER: ${{ secrets.G_LOGIN_NON_PARTNER }}
+      G_PASSWORD_NON_PARTNER: ${{ secrets.G_PASSWORD_NON_PARTNER }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
