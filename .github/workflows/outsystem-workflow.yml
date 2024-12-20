@@ -18,6 +18,9 @@ on:
 jobs:
   run-testimio-cli:
     runs-on: ubuntu-latest
+    env:
+      TESTIM_PROJECT: ${{ secrets.TESTIM_PROJECT }}
+      ENVIRONMENT: ${{ github.event.inputs.environment }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -30,7 +33,7 @@ jobs:
         run: |
           testim -c "config/partnershub-bo-config.js" \
             --token "${{ secrets.TESTIM_TOKEN }}" \
-            --project "${{ secrets.TESTIM_PROJECT }}" \
+            --project "${{ env.TESTIM_PROJECT }}" \
             --grid "Testim-Grid" \
             --branch "${{ github.event.inputs.branch }}" \
             --test-plan "${{ github.event.inputs.testname }}"

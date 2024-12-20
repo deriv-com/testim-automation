@@ -18,7 +18,7 @@ exports.config = {
       .post(slackApiUrl, {
         suite: `Test suite started: TestIM Partners Hub Smoke`,
         testim_link: testim_link,
-        environment: process.env.GITHUB_INPUT_ENVIRONMENT,
+        environment: process.env.ENVIRONMENT,
       })
       .then((response) => {
         console.log(`Slack API posted successfully: ${response.status}`);
