@@ -44,7 +44,19 @@ exports.config = {
             type: "section",
             text: {
               type: "plain_text",
-              text: "Time: " + new Date().toISOString(),
+              text:
+                "Time: " +
+                new Date().toLocaleString("en-US", {
+                  timeZone: "UTC",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                  hour12: true,
+                }) +
+                " UTC",
               emoji: true,
             },
           },
