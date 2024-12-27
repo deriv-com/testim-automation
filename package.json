@@ -5,6 +5,7 @@
     "test": "testim"
   },
   "dependencies": {
+    "@slack/web-api": "^7.8.0",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "node-fetch": "^3.3.2"

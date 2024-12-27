@@ -18,8 +18,8 @@ on:
         description: "Outsystems app name"
         required: true
         default: "PartnersHub"
-      slack_url:
-        description: "Slack webhook url"
+      slack_channel_id:
+        description: "Slack channel id"
         required: true
 
 jobs:
@@ -34,10 +34,12 @@ jobs:
       G_PASSWORD_BO: ${{ secrets.G_PASSWORD_BO }}
       G_LOGIN_NON_PARTNER: ${{ secrets.G_LOGIN_NON_PARTNER }}
       G_PASSWORD_NON_PARTNER: ${{ secrets.G_PASSWORD_NON_PARTNER }}
+      SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
       APP_NAME: ${{ github.event.inputs.app_name }}
       SUITE_NAME: ${{ github.event.inputs.testplan }}
-      SLACK_WEBHOOK_URL: ${{ github.event.inputs.slack_url }}
+      SLACK_CHANNEL_ID: ${{ github.event.inputs.slack_channel_id }}
       BRANCH: ${{ github.event.inputs.branch }}
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
