@@ -1,11 +1,11 @@
-name: Testim E2E
+name: Testim Automation
 on:
   workflow_dispatch:
     inputs:
       branch:
         description: "Testim Branch"
         required: true
-        default: "Jia/test-webhook"
+        default: "main"
       testplan:
         description: "Testim Test Name"
         required: true
@@ -28,12 +28,6 @@ jobs:
     env:
       TESTIM_PROJECT: ${{ secrets.TESTIM_PROJECT }}
       ENVIRONMENT: ${{ github.event.inputs.environment }}
-      G_LOGIN: ${{ secrets.G_LOGIN }}
-      G_PASSWORD: ${{ secrets.G_PASSWORD }}
-      G_LOGIN_BO: ${{ secrets.G_LOGIN_BO }}
-      G_PASSWORD_BO: ${{ secrets.G_PASSWORD_BO }}
-      G_LOGIN_NON_PARTNER: ${{ secrets.G_LOGIN_NON_PARTNER }}
-      G_PASSWORD_NON_PARTNER: ${{ secrets.G_PASSWORD_NON_PARTNER }}
       SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
       APP_NAME: ${{ github.event.inputs.app_name }}
       SUITE_NAME: ${{ github.event.inputs.testplan }}
@@ -50,7 +44,7 @@ jobs:
 
       - name: Run Testim Tests
         run: |
-          testim -c "config/partnershub-bo-config.js" \
+          testim -c "config/index.js" \
             --token "${{ secrets.TESTIM_TOKEN }}" \
             --project "${{ env.TESTIM_PROJECT }}" \
             --grid "Testim-Grid" \
