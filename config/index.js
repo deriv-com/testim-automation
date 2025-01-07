@@ -1,6 +1,12 @@
-const axios = require("axios");
 const { WebClient } = require("@slack/web-api");
+const moment = require("moment");
 require("dotenv").config();
+
+const emoji = {
+  inProgress: ":workinprogress:",
+  failed: ":release_fail:",
+  passed: ":white_check_mark:",
+};
 
 exports.config = {
   beforeSuite: async function (suite) {
@@ -10,81 +16,59 @@ exports.config = {
     const channelId = process.env.SLACK_CHANNEL_ID;
     const token = process.env.SLACK_TOKEN;
     const client = new WebClient(token);
+    const appName = process.env.APP_NAME;
+    const environment = process.env.ENVIRONMENT;
+    const testPlan = process.env.SUITE_NAME;
 
-    const testim_link = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${id}`;
+    const date = moment().utc().format("MMMM D, YYYY @ HH:mm:ss UTC");
+
+    const testimLink = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${id}`;
     try {
-      await client.chat.postMessage({
+      const message = await client.chat.postMessage({
         channel: channelId,
         blocks: [
           {
             type: "section",
             text: {
-              type: "plain_text",
-              text: "App: " + process.env.APP_NAME,
+              type: "mrkdwn",
+              text: `<${testimLink}|${appName} [${environment}] - ${testPlan} [${date}] ${emoji.inProgress}>`,
               emoji: true,
             },
-          },
-          {
-            type: "section",
-            text: {
-              type: "plain_text",
-              text: "Published to: " + process.env.ENVIRONMENT,
-              emoji: true,
-            },
-          },
-          {
-            type: "section",
-            text: {
-              type: "plain_text",
-              text: "Test plan: " + process.env.SUITE_NAME,
-              emoji: true,
-            },
-          },
-          {
-            type: "section",
-            text: {
-              type: "plain_text",
-              text:
-                "Time: " +
-                new Date().toLocaleString("en-US", {
-                  timeZone: "UTC",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  second: "2-digit",
-                  hour12: true,
-                }) +
-                " UTC",
-              emoji: true,
-            },
-          },
-          {
-            type: "actions",
-            elements: [
-              {
-                type: "button",
-                text: {
-                  type: "plain_text",
-                  text: "TestIM Link",
-                  emoji: true,
-                },
-                value: "click_me",
-                url: testim_link,
-                action_id: "actionId-0",
-              },
-            ],
           },
         ],
       });
       console.log("Message posted successfully");
+
+      messageId = message.ts;
     } catch (error) {
       console.error("Error posting message:", error);
     }
   },
 
   afterSuite: async function (suite) {
-    console.log("Suite finished:", suite);
+    const { tests } = suite;
+
+    const failedTests = tests.filter((test) => test.status === "failed");
+
+    try {
+      const message = await client.chat.update({
+        channel: channelId,
+        ts: messageId,
+        blocks: [
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: `<${testimLink}|${appName} [${environment}] - ${testPlan} [${date}] ${
+                failedTests.length > 0 ? emoji.failed : emoji.passed
+              }>`,
+              emoji: true,
+            },
+          },
+        ],
+      });
+    } catch (error) {
+      console.error("Error updating message:", error);
+    }
   },
 };
