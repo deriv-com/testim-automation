@@ -1,3 +1,4 @@
+const { createSlackMessage } = require("./message.js");
 const { WebClient } = require("@slack/web-api");
 const moment = require("moment");
 require("dotenv").config();
@@ -32,15 +33,15 @@ exports.config = {
     try {
       const message = await client.chat.postMessage({
         channel: channelId,
-        blocks: [
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: `<${testimLink}|${appName} [${environment}] - ${testPlan} [${date}] ${emoji.inProgress} >`,
-            },
-          },
-        ],
+        blocks: createSlackMessage(
+          appName,
+          testPlan,
+          environment,
+          date,
+          emoji.inProgress,
+          testimLink,
+          id
+        ),
       });
       console.log("Message posted successfully");
 
@@ -52,8 +53,7 @@ exports.config = {
 
   afterSuite: async function (suite) {
     const { tests } = suite;
-
-    const failedTests = tests.filter((test) => test.status === "failed");
+    const failedTests = tests.filter((test) => test.status === "FAILED");
     const testimLink = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${id}`;
     const icon = failedTests.length > 0 ? emoji.failed : emoji.passed;
 
@@ -61,15 +61,16 @@ exports.config = {
       await client.chat.update({
         channel: channelId,
         ts: messageId,
-        blocks: [
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: `<${testimLink}|${appName} [${environment}] - ${testPlan} [${date}] ${icon}>`,
-            },
-          },
-        ],
+        blocks: createSlackMessage(
+          appName,
+          testPlan,
+          environment,
+          date,
+          icon,
+          testimLink,
+          id,
+          failedTests
+        ),
       });
     } catch (error) {
       console.error("Error updating message:", error);
