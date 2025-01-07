@@ -29,7 +29,6 @@ exports.config = {
 
     const testimLink = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${id}`;
 
-    let messageId;
     try {
       const message = await client.chat.postMessage({
         channel: channelId,
@@ -58,7 +57,7 @@ exports.config = {
     const testimLink = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${id}`;
 
     try {
-      const message = await client.chat.update({
+      await client.chat.update({
         channel: channelId,
         ts: messageId,
         blocks: [
