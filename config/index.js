@@ -38,7 +38,7 @@ exports.config = {
             type: "section",
             text: {
               type: "mrkdwn",
-              text: `<${testimLink}|${appName} [${environment}] - ${testPlan} [${date}] ${emoji.inProgress}>`,
+              text: `<${testimLink}|${appName} [${environment}] - ${testPlan} [${date}] ${emoji.inProgress} >`,
             },
           },
         ],
@@ -56,8 +56,6 @@ exports.config = {
 
     const failedTests = tests.filter((test) => test.status === "failed");
     const testimLink = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${id}`;
-
-    console.log(suite.messageId);
 
     try {
       const message = await client.chat.update({
