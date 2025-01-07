@@ -32,7 +32,6 @@ exports.config = {
             text: {
               type: "mrkdwn",
               text: `<${testimLink}|${appName} [${environment}] - ${testPlan} [${date}] ${emoji.inProgress}>`,
-              emoji: true,
             },
           },
         ],
