@@ -10,13 +10,14 @@ const emoji = {
 
 const token = process.env.SLACK_TOKEN;
 const client = new WebClient(token);
+const channelId = process.env.SLACK_CHANNEL_ID;
 
 exports.config = {
   beforeSuite: async function (suite) {
     const id = suite.executionId;
     const project = encodeURIComponent(process.env.TESTIM_PROJECT);
     const branch = encodeURIComponent(process.env.BRANCH);
-    const channelId = process.env.SLACK_CHANNEL_ID;
+
     const appName = process.env.APP_NAME;
     const environment = process.env.ENVIRONMENT;
     const testPlan = process.env.SUITE_NAME;
@@ -43,6 +44,8 @@ exports.config = {
     } catch (error) {
       console.error("Error posting message:", error);
     }
+
+    return { messageId };
   },
 
   afterSuite: async function (suite) {
@@ -53,7 +56,7 @@ exports.config = {
     try {
       const message = await client.chat.update({
         channel: channelId,
-        ts: messageId,
+        ts: suite.messageId,
         blocks: [
           {
             type: "section",
