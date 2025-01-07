@@ -27,6 +27,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TESTIM_PROJECT: ${{ secrets.TESTIM_PROJECT }}
+      TESTIM_TOKEN: ${{ secrets.TESTIM_TOKEN }}
+      TESTIM_BRANCH: ${{ github.event.inputs.branch }}
+      TESTIM_PLAN: ${{ github.event.inputs.testplan }}
       ENVIRONMENT: ${{ github.event.inputs.environment }}
       SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
       APP_NAME: ${{ github.event.inputs.app_name }}
@@ -45,8 +48,8 @@ jobs:
       - name: Run Testim Tests
         run: |
           testim -c "config/index.js" \
-            --token "${{ secrets.TESTIM_TOKEN }}" \
-            --project "${{ env.TESTIM_PROJECT }}" \
+            --token "$TESTIM_TOKEN" \
+            --project "$TESTIM_PROJECT" \
             --grid "Testim-Grid" \
-            --branch "${{ github.event.inputs.branch }}" \
-            --test-plan "${{ github.event.inputs.testplan }}"
+            --branch "$TESTIM_BRANCH" \
+            --test-plan "$TESTIM_PLAN"
