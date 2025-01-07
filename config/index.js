@@ -11,8 +11,6 @@ const emoji = {
 const token = process.env.SLACK_TOKEN;
 const client = new WebClient(token);
 const channelId = process.env.SLACK_CHANNEL_ID;
-
-const id = suite.executionId;
 const project = encodeURIComponent(process.env.TESTIM_PROJECT);
 const branch = encodeURIComponent(process.env.BRANCH);
 
@@ -20,9 +18,13 @@ const appName = process.env.APP_NAME;
 const environment = process.env.ENVIRONMENT;
 const testPlan = process.env.SUITE_NAME;
 
+let id;
+let date;
+
 exports.config = {
   beforeSuite: async function (suite) {
-    const date = moment().utc().format("MMMM D, YYYY @ HH:mm:ss UTC");
+    date = moment().utc().format("MMMM D, YYYY @ HH:mm:ss UTC");
+    id = suite.executionId;
 
     const testimLink = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${id}`;
 
@@ -54,6 +56,7 @@ exports.config = {
     const { tests } = suite;
 
     const failedTests = tests.filter((test) => test.status === "failed");
+    const testimLink = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${id}`;
 
     try {
       const message = await client.chat.update({
