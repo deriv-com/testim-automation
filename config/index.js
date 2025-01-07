@@ -12,16 +12,16 @@ const token = process.env.SLACK_TOKEN;
 const client = new WebClient(token);
 const channelId = process.env.SLACK_CHANNEL_ID;
 
+const id = suite.executionId;
+const project = encodeURIComponent(process.env.TESTIM_PROJECT);
+const branch = encodeURIComponent(process.env.BRANCH);
+
+const appName = process.env.APP_NAME;
+const environment = process.env.ENVIRONMENT;
+const testPlan = process.env.SUITE_NAME;
+
 exports.config = {
   beforeSuite: async function (suite) {
-    const id = suite.executionId;
-    const project = encodeURIComponent(process.env.TESTIM_PROJECT);
-    const branch = encodeURIComponent(process.env.BRANCH);
-
-    const appName = process.env.APP_NAME;
-    const environment = process.env.ENVIRONMENT;
-    const testPlan = process.env.SUITE_NAME;
-
     const date = moment().utc().format("MMMM D, YYYY @ HH:mm:ss UTC");
 
     const testimLink = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${id}`;
