@@ -8,14 +8,15 @@ const emoji = {
   passed: ":white_check_mark:",
 };
 
+const token = process.env.SLACK_TOKEN;
+const client = new WebClient(token);
+
 exports.config = {
   beforeSuite: async function (suite) {
     const id = suite.executionId;
     const project = encodeURIComponent(process.env.TESTIM_PROJECT);
     const branch = encodeURIComponent(process.env.BRANCH);
     const channelId = process.env.SLACK_CHANNEL_ID;
-    const token = process.env.SLACK_TOKEN;
-    const client = new WebClient(token);
     const appName = process.env.APP_NAME;
     const environment = process.env.ENVIRONMENT;
     const testPlan = process.env.SUITE_NAME;
