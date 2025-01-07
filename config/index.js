@@ -20,6 +20,7 @@ const testPlan = process.env.SUITE_NAME;
 
 let id;
 let date;
+let messageId;
 
 exports.config = {
   beforeSuite: async function (suite) {
@@ -48,8 +49,6 @@ exports.config = {
     } catch (error) {
       console.error("Error posting message:", error);
     }
-
-    return { messageId };
   },
 
   afterSuite: async function (suite) {
@@ -63,7 +62,7 @@ exports.config = {
     try {
       const message = await client.chat.update({
         channel: channelId,
-        ts: suite.messageId,
+        ts: messageId,
         blocks: [
           {
             type: "section",
