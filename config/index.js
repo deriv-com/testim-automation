@@ -25,6 +25,8 @@ exports.config = {
     const date = moment().utc().format("MMMM D, YYYY @ HH:mm:ss UTC");
 
     const testimLink = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${id}`;
+
+    let messageId;
     try {
       const message = await client.chat.postMessage({
         channel: channelId,
