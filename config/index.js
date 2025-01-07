@@ -83,4 +83,8 @@ exports.config = {
       console.error("Error posting message:", error);
     }
   },
+
+  afterSuite: async function (suite) {
+    console.log("Suite finished:", suite);
+  },
 };
