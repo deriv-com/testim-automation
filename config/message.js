@@ -7,8 +7,8 @@ function createSlackMessage(
   testLink,
   id,
   failedTests,
-  mentionedUsers,
-  mentionedUsersGroup
+  mentionedUsers = [],
+  mentionedUsersGroup = []
 ) {
   return [
     {
@@ -47,8 +47,9 @@ function createSlackMessage(
                     text: `cc: ${
                       mentionedUsersGroup
                         .map((id) => `<!subteam^${id}>`)
-                        .join("") +
-                      mentionedUsers.map((id) => `<@${id}>`).join("")
+                        .join(" ") +
+                      " " +
+                      mentionedUsers.map((id) => `<@${id}>`).join(" ")
                     }`,
                   },
                 },
