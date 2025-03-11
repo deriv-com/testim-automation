@@ -29,10 +29,9 @@ function createSlackMessage(
         action_id: "button-action",
       },
     },
-    ...(failedTests && failedTests.length > 0
+    ...(failedTests.length > 0
       ? [
-          ...((mentionedUsersGroup && mentionedUsersGroup.length > 0) ||
-          (mentionedUsers && mentionedUsers.length > 0)
+          ...(mentionedUsersGroup.length > 0 || mentionedUsers.length > 0
             ? [
                 {
                   type: "section",
@@ -44,7 +43,7 @@ function createSlackMessage(
                 {
                   type: "section",
                   text: {
-                    type: "mrkdown",
+                    type: "mrkdwn",
                     text: `cc: ${
                       mentionedUsersGroup
                         .map((id) => `<!subteam^${id}>`)
