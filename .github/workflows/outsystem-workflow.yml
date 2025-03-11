@@ -24,8 +24,8 @@ on:
       mentioned_users:
         description: "Slack users to mention"
         required: false
-      mentioned_users_group:
-        description: "Slack users group to mention"
+      mentioned_users_groups:
+        description: "Slack users groups to mention"
         required: false
 
 jobs:
