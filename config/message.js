@@ -6,7 +6,9 @@ function createSlackMessage(
   emoji,
   testLink,
   id,
-  failedTests
+  failedTests,
+  mentionedUsers,
+  mentionedUsersGroup
 ) {
   return [
     {
@@ -29,6 +31,30 @@ function createSlackMessage(
     },
     ...(failedTests && failedTests.length > 0
       ? [
+          ...((mentionedUsersGroup && mentionedUsersGroup.length > 0) ||
+          (mentionedUsers && mentionedUsers.length > 0)
+            ? [
+                {
+                  type: "section",
+                  text: {
+                    type: "plain_text",
+                    text: "Some tests have failed.",
+                  },
+                },
+                {
+                  type: "section",
+                  text: {
+                    type: "mrkdown",
+                    text: `cc: ${
+                      mentionedUsersGroup
+                        .map((id) => `<!subteam^${id}>`)
+                        .join("") +
+                      mentionedUsers.map((id) => `<@${id}>`).join("")
+                    }`,
+                  },
+                },
+              ]
+            : []),
           {
             type: "divider",
           },

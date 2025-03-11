@@ -14,6 +14,8 @@ const client = new WebClient(token);
 const channelId = process.env.SLACK_CHANNEL_ID;
 const project = encodeURIComponent(process.env.TESTIM_PROJECT);
 const branch = encodeURIComponent(process.env.BRANCH);
+const mentionedUsers = process.env.MENTIONED_USERS;
+const mentionedUsersGroup = process.env.MENTIONED_USERS_GROUP;
 
 const appName = process.env.APP_NAME;
 const environment = process.env.ENVIRONMENT;
@@ -56,6 +58,8 @@ exports.config = {
     const failedTests = tests.filter((test) => test.status === "FAILED");
     const testimLink = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${id}`;
     const icon = failedTests.length > 0 ? emoji.failed : emoji.passed;
+    const mentionedUsers = mentionedUsers.split(",");
+    const mentionedUsersGroup = mentionedUsersGroup.split(",");
 
     try {
       await client.chat.update({
@@ -69,7 +73,9 @@ exports.config = {
           icon,
           testimLink,
           id,
-          failedTests
+          failedTests,
+          mentionedUsers,
+          mentionedUsersGroup
         ),
       });
     } catch (error) {

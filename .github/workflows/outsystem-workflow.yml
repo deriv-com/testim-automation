@@ -21,6 +21,12 @@ on:
       slack_channel_id:
         description: "Slack channel id"
         required: true
+      mentioned_users:
+        description: "Slack users to mention"
+        required: false
+      mentioned_users_group:
+        description: "Slack users group to mention"
+        required: false
 
 jobs:
   run-testimio-cli:
@@ -36,6 +42,8 @@ jobs:
       SUITE_NAME: ${{ github.event.inputs.testplan }}
       SLACK_CHANNEL_ID: ${{ github.event.inputs.slack_channel_id }}
       BRANCH: ${{ github.event.inputs.branch }}
+      MENTIONED_USERS: ${{ github.event.inputs.mentioned_users }}
+      MENTIONED_USERS_GROUP: ${{ github.event.inputs.mentioned_users_group }}
 
     steps:
       - uses: actions/checkout@v2
