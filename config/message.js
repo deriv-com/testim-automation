@@ -29,9 +29,10 @@ function createSlackMessage(
         action_id: "button-action",
       },
     },
-    ...(failedTests.length > 0
+    ...(failedTests && failedTests.length > 0
       ? [
-          ...(mentionedUsersGroup.length > 0 || mentionedUsers.length > 0
+          ...((mentionedUsersGroup && mentionedUsersGroup.length > 0) ||
+          (mentionedUsers && mentionedUsers.length > 0)
             ? [
                 {
                   type: "section",
