@@ -26,6 +26,7 @@ let date;
 let messageId;
 
 exports.config = {
+  baseUrl: "https://app.testim.io",
   beforeSuite: async function (suite) {
     date = moment().utc().format("MMMM D, YYYY @ HH:mm:ss UTC");
     id = suite.executionId;
@@ -51,6 +52,12 @@ exports.config = {
     } catch (error) {
       console.error("Error posting message:", error);
     }
+
+    return {
+      overrideTestData: {
+        env: environment,
+      },
+    };
   },
 
   afterSuite: async function (suite) {
