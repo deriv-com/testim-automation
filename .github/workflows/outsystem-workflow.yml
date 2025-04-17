@@ -5,11 +5,11 @@ on:
       branch:
         description: "Testim Branch"
         required: true
-        default: "main"
+        default: "master"
       testplan:
         description: "Testim Test Name"
         required: true
-        default: "Regression - Partners Hub - Desktop"
+        default: "Testing Hooks"
       environment:
         description: "Outsystems publish environment"
         required: true
@@ -17,7 +17,7 @@ on:
       override_base_url:
         description: "Override base url"
         required: false
-        default: ""
+        default: "https://dev-hub.deriv.com/PartnersHub/"
       app_name:
         description: "Outsystems app name"
         required: true
@@ -25,6 +25,7 @@ on:
       slack_channel_id:
         description: "Slack channel id"
         required: true
+        default: "C07V5ULKHPW"
       mentioned_users:
         description: "Slack users to mention"
         required: false
