@@ -20,13 +20,14 @@ const mentionedUsersGroup = process.env.MENTIONED_USERS_GROUP;
 const appName = process.env.APP_NAME;
 const environment = process.env.ENVIRONMENT;
 const testPlan = process.env.SUITE_NAME;
+const overrideBaseUrl = process.env.OVERRIDE_BASE_URL;
 
 let id;
 let date;
 let messageId;
 
 exports.config = {
-  baseUrl: "https://app.testim.io",
+  ...(overrideBaseUrl && { baseUrl: overrideBaseUrl }),
   beforeSuite: async function (suite) {
     date = moment().utc().format("MMMM D, YYYY @ HH:mm:ss UTC");
     id = suite.executionId;

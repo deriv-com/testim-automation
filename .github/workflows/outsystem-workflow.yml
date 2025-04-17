@@ -14,6 +14,10 @@ on:
         description: "Outsystems publish environment"
         required: true
         default: "Staging"
+      override_base_url:
+        description: "Override base url"
+        required: false
+        default: ""
       app_name:
         description: "Outsystems app name"
         required: true
@@ -37,6 +41,7 @@ jobs:
       TESTIM_BRANCH: ${{ github.event.inputs.branch }}
       TESTIM_PLAN: ${{ github.event.inputs.testplan }}
       ENVIRONMENT: ${{ github.event.inputs.environment }}
+      OVERRIDE_BASE_URL: ${{ github.event.inputs.override_base_url }}
       SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
       APP_NAME: ${{ github.event.inputs.app_name }}
       SUITE_NAME: ${{ github.event.inputs.testplan }}
