@@ -7,8 +7,8 @@ function createSlackMessage(
   testLink,
   id,
   failedTests,
-  mentionedUsers = [],
-  mentionedUsersGroup = []
+  mentionUsers = [],
+  mentionUsersGroup = []
 ) {
   return [
     {
@@ -31,8 +31,8 @@ function createSlackMessage(
     },
     ...(failedTests && failedTests.length > 0
       ? [
-          ...((mentionedUsersGroup && mentionedUsersGroup.length > 0) ||
-          (mentionedUsers && mentionedUsers.length > 0)
+          ...((mentionUsersGroup && mentionUsersGroup.length > 0) ||
+          (mentionUsers && mentionUsers.length > 0)
             ? [
                 {
                   type: "section",

@@ -21,7 +21,7 @@ on:
       app_name:
         description: "Outsystems app name"
         required: true
-        default: "PartnersHub"
+        default: "Test workflow"
       slack_channel_id:
         description: "Slack channel id"
         required: true

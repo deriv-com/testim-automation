@@ -66,8 +66,8 @@ exports.config = {
     const failedTests = tests.filter((test) => test.status === "FAILED");
     const testimLink = `https://app.testim.io/#/project/${project}/branch/${branch}/runs/suites/${id}`;
     const icon = failedTests.length > 0 ? emoji.failed : emoji.passed;
-    const users = mentionedUsers.split(",");
-    const usersGroups = mentionedUsersGroup.split(",");
+    const mentionUsers = mentionedUsers.split(",");
+    const mentionUsersGroup = mentionedUsersGroup.split(",");
 
     try {
       await client.chat.update({
@@ -82,8 +82,8 @@ exports.config = {
           testimLink,
           id,
           failedTests,
-          users,
-          usersGroups
+          mentionUsers,
+          mentionUsersGroup
         ),
       });
     } catch (error) {
