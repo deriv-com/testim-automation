@@ -46,11 +46,11 @@ function createSlackMessage(
                   text: {
                     type: "mrkdwn",
                     text: `cc: ${
-                      mentionedUsersGroup
+                      mentionUsersGroup
                         .map((id) => `<!subteam^${id}>`)
                         .join(" ") +
                       " " +
-                      mentionedUsers.map((id) => `<@${id}>`).join(" ")
+                      mentionUsers.map((id) => `<@${id}>`).join(" ")
                     }`,
                   },
                 },
