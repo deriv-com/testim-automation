@@ -53,12 +53,6 @@ exports.config = {
     } catch (error) {
       console.error("Error posting message:", error);
     }
-
-    return {
-      overrideTestData: {
-        env: environment,
-      },
-    };
   },
 
   afterSuite: async function (suite) {
